@@ -4,8 +4,7 @@
    ============================================================ */
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
-const ABOUT_IMG =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663470774982/3gi9ycfsRZLZBDYVekpZBe/about-jack-GuNtMRAZVhXcNFeSGJB3ro.webp";
+const ABOUT_IMG = "/gallery/about-jack.jpg";
 
 export default function AboutSection() {
   const { ref } = useScrollReveal();
