@@ -203,6 +203,17 @@ export default function HeroSection() {
         />
       </div>
 
+      {/* ── Top dark band — ensures navbar text is always readable ── */}
+      <div
+        className="absolute top-0 left-0 right-0 z-10"
+        style={{
+          height: "120px",
+          background:
+            "linear-gradient(to bottom, oklch(0.10 0.04 255 / 0.85) 0%, transparent 100%)",
+          pointerEvents: "none",
+        }}
+      />
+
       {/* ── Diagonal bottom cut (full width) ── */}
       <div
         className="absolute bottom-0 left-0 right-0"
