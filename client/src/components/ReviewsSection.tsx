@@ -86,19 +86,7 @@ export default function ReviewsSection() {
                 }}
               >
                 <Stars rating={review.rating} />
-                <p
-                  className="mt-3 flex-1"
-                  style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: "0.9rem",
-                    color: "oklch(0.75 0.005 240)",
-                    lineHeight: 1.7,
-                    fontStyle: "italic",
-                  }}
-                >
-                  "{review.message}"
-                </p>
-                <div className="mt-4 pt-4" style={{ borderTop: "1px solid oklch(1 0 0 / 0.06)" }}>
+                <div className="mt-4 pt-4 flex-1 flex items-end" style={{ borderTop: "1px solid oklch(1 0 0 / 0.06)" }}>
                   <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem", color: "white", fontWeight: 600 }}>
                     {review.name}
                   </p>

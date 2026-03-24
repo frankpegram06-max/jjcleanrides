@@ -17,14 +17,14 @@ interface Review {
 }
 
 const reviews: Review[] = [
-  { id: "1", name: "Ned Robertson", location: "Southampton", rating: 5, message: "Absolutely spotless — couldn't believe the difference. Jack is thorough, professional and takes real pride in his work.", date: "2026-02-10" },
-  { id: "2", name: "Theo Down", location: "Totton", rating: 5, message: "Great local service, turned up on time and did an amazing job. Car looked showroom fresh. Will be booking again for sure.", date: "2026-02-18" },
-  { id: "3", name: "George SB", location: "New Forest", rating: 5, message: "Used Jack for the deep detail and it was worth every penny. Car looks brand new inside and out.", date: "2026-02-25" },
-  { id: "4", name: "Josh Elsea", location: "Lyndhurst", rating: 5, message: "Really impressed with the quality. Booked the Quick Detail and it was great value — done quickly and to a high standard.", date: "2026-03-04" },
-  { id: "5", name: "Matty Taylor", location: "Fareham", rating: 5, message: "Booked the outside only package and my car hasn't looked this clean since I bought it. Plates blurred in photos too which I appreciated!", date: "2026-03-08" },
-  { id: "6", name: "Riley Maynard", location: "Hythe", rating: 5, message: "Super convenient — comes straight to your door and the results speak for themselves. Highly recommend to anyone in the area.", date: "2026-03-12" },
-  { id: "7", name: "Ava Pegram", location: "Southampton", rating: 5, message: "Fantastic service, very professional. The interior clean was incredible — looks and smells brand new.", date: "2026-03-15" },
-  { id: "8", name: "Frank Pegram", location: "Totton", rating: 5, message: "Best valet I've had. Jack is reliable, detailed and genuinely cares about the finish. Would not go anywhere else.", date: "2026-03-19" },
+  { id: "1", name: "Ned Robertson", location: "New Forest", rating: 5, message: "", date: "2026-02-10" },
+  { id: "2", name: "Theo Down", location: "New Forest", rating: 5, message: "", date: "2026-02-18" },
+  { id: "3", name: "George SB", location: "New Forest", rating: 5, message: "", date: "2026-02-25" },
+  { id: "4", name: "Josh Elsea", location: "New Forest", rating: 5, message: "", date: "2026-03-04" },
+  { id: "5", name: "Matty Taylor", location: "New Forest", rating: 5, message: "", date: "2026-03-08" },
+  { id: "6", name: "Riley Maynard", location: "New Forest", rating: 5, message: "", date: "2026-03-12" },
+  { id: "7", name: "Ava Pegram", location: "New Forest", rating: 5, message: "", date: "2026-03-15" },
+  { id: "8", name: "Frank Pegram", location: "New Forest", rating: 5, message: "", date: "2026-03-19" },
 ];
 
 async function startServer() {
