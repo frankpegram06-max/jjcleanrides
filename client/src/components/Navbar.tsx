@@ -45,17 +45,11 @@ export default function Navbar() {
           onClick={(e) => { e.preventDefault(); scrollTo("#hero"); }}
           className="flex items-center gap-2 no-underline"
         >
-          <span
-            style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: "1.5rem",
-              letterSpacing: "0.05em",
-              color: "white",
-              lineHeight: 1,
-            }}
-          >
-            JJ<span style={{ color: "oklch(0.65 0.2 220)" }}>Clean</span>Rides
-          </span>
+          <img
+            src="/gallery/logo.png"
+            alt="JJCleanRides"
+            style={{ height: "48px", width: "auto" }}
+          />
         </a>
 
         {/* Desktop nav */}
