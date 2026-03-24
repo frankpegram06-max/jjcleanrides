@@ -6,7 +6,8 @@
 import { useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
-// TODO: Replace with your Formspree form ID — sign up free at https://formspree.io
+// Formspree endpoint — sign up at https://formspree.io using jj1103200825@gmail.com
+// then replace YOUR_FORM_ID with the ID from your Formspree dashboard
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
 
 type FormState = "idle" | "submitting" | "success" | "error";
@@ -246,8 +247,10 @@ export default function EnquiryFormSection() {
                     onBlur={(e) => (e.target.style.borderColor = "oklch(1 0 0 / 0.12)")}
                   >
                     <option value="" style={{ background: "#1a2540" }}>Select a package</option>
-                    <option value="Quick Clean £30" style={{ background: "#1a2540" }}>Quick Clean — £30</option>
-                    <option value="Deep Detailed Clean £50" style={{ background: "#1a2540" }}>Deep Detailed Clean — £50</option>
+                    <option value="Deep Detail £50" style={{ background: "#1a2540" }}>A — Deep Detail (£50)</option>
+                    <option value="Quick Detail £30" style={{ background: "#1a2540" }}>B — Quick Detail (£30)</option>
+                    <option value="Inside Only £20" style={{ background: "#1a2540" }}>C — Inside Only (£20)</option>
+                    <option value="Outside Only £20" style={{ background: "#1a2540" }}>D — Outside Only (£20)</option>
                   </select>
                 </div>
                 <div>

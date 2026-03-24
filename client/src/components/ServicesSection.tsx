@@ -6,31 +6,63 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const services = [
   {
-    name: "Quick Clean",
-    description: "Full interior and exterior clean",
+    label: "A",
+    name: "Deep Detail",
+    description: "Full interior & exterior — the works",
+    price: "£50",
+    features: [
+      "Snow foam & pre wash",
+      "Chrome & plastic trims",
+      "Tyres dressed",
+      "Wax coat applied",
+      "Deep hoover",
+      "Vents & dashboard cleaned",
+      "Seats cleaned",
+      "Wheels deep cleaned",
+    ],
+    highlight: true,
+  },
+  {
+    label: "B",
+    name: "Quick Detail",
+    description: "Fast refresh inside & out",
     price: "£30",
     features: [
-      "Full exterior hand wash",
-      "Wheel & tyre clean",
-      "Interior vacuum & wipe down",
-      "Window clean inside & out",
-      "Air freshener",
+      "Snow foam & pre wash",
+      "Inside hoovered",
+      "Inside dusted",
+      "Dash wipe down",
+      "Glass clean",
+      "Wheels cleaned",
     ],
     highlight: false,
   },
   {
-    name: "Deep Detailed Clean",
-    description: "Thorough interior and exterior detail",
-    price: "£50",
+    label: "C",
+    name: "Inside Only",
+    description: "Full interior clean",
+    price: "£20",
     features: [
-      "Everything in Quick Clean",
-      "Clay bar & paint decontamination",
-      "Leather conditioning",
-      "Carpet & seat deep clean",
-      "Engine bay wipe down",
-      "Tyre dressing applied",
+      "Carpets hoovered",
+      "Seats hoovered",
+      "Windows cleaned",
+      "Vents & dash wipe",
     ],
-    highlight: true,
+    highlight: false,
+  },
+  {
+    label: "D",
+    name: "Outside Only",
+    description: "Full exterior clean",
+    price: "£20",
+    features: [
+      "Snow foam & pre wash",
+      "Chrome & plastic trims",
+      "Wheels cleaned",
+      "Glass cleaned",
+      "Headlights cleaned",
+    ],
+    highlight: false,
   },
 ];
 
@@ -69,7 +101,7 @@ export default function ServicesSection() {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 items-start">
           {services.map((s, i) => (
             <div
               key={s.name}
@@ -98,6 +130,25 @@ export default function ServicesSection() {
                   />
                 )}
 
+                {/* Package label badge */}
+                <div
+                  className="absolute top-4 left-4 w-8 h-8 flex items-center justify-center"
+                  style={{
+                    background: s.highlight ? "oklch(0.65 0.2 220)" : "oklch(0.65 0.2 220 / 0.15)",
+                    border: "1px solid oklch(0.65 0.2 220 / 0.5)",
+                    borderRadius: "2px",
+                  }}
+                >
+                  <span style={{
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: "1rem",
+                    color: s.highlight ? "white" : "oklch(0.65 0.2 220)",
+                    letterSpacing: "0.05em",
+                  }}>
+                    {s.label}
+                  </span>
+                </div>
+
                 {s.highlight && (
                   <div
                     className="absolute top-4 right-4 text-xs font-semibold tracking-widest uppercase px-2 py-1"
@@ -113,7 +164,7 @@ export default function ServicesSection() {
                   </div>
                 )}
 
-                <div className="mb-6">
+                <div className="mb-6 mt-8">
                   <h3
                     style={{
                       fontFamily: "'Bebas Neue', sans-serif",
