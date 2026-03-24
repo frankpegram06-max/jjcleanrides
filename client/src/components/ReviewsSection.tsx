@@ -14,15 +14,21 @@ interface Review {
   date: string;
 }
 
-function Stars({ rating }: { rating: number }) {
+function Stars({ rating, interactive = false, onChange }: { rating: number; interactive?: boolean; onChange?: (r: number) => void }) {
+  const [hovered, setHovered] = useState(0);
   return (
     <div className="flex gap-1">
       {[1, 2, 3, 4, 5].map((star) => (
         <span
           key={star}
+          onClick={() => interactive && onChange?.(star)}
+          onMouseEnter={() => interactive && setHovered(star)}
+          onMouseLeave={() => interactive && setHovered(0)}
           style={{
-            fontSize: "1rem",
-            color: star <= rating ? "oklch(0.82 0.18 80)" : "oklch(0.35 0.01 240)",
+            fontSize: interactive ? "1.8rem" : "1rem",
+            color: star <= (hovered || rating) ? "oklch(0.82 0.18 80)" : "oklch(0.35 0.01 240)",
+            cursor: interactive ? "pointer" : "default",
+            transition: "color 0.15s",
           }}
         >
           ★
@@ -35,6 +41,8 @@ function Stars({ rating }: { rating: number }) {
 export default function ReviewsSection() {
   const { ref } = useScrollReveal();
   const [reviews, setReviews] = useState<Review[]>([]);
+  const [form, setForm] = useState({ name: "", rating: 5 });
+  const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   useEffect(() => {
     fetch("/api/reviews")
@@ -42,6 +50,30 @@ export default function ReviewsSection() {
       .then(setReviews)
       .catch(() => {});
   }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name) return;
+    setFormState("submitting");
+    try {
+      const res = await fetch("/api/reviews", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        const newReview = await res.json();
+        setReviews((prev) => [...prev, newReview]);
+        setForm({ name: "", rating: 5 });
+        setFormState("success");
+        setTimeout(() => setFormState("idle"), 3000);
+      } else {
+        setFormState("error");
+      }
+    } catch {
+      setFormState("error");
+    }
+  };
 
   return (
     <section id="reviews" className="py-24" style={{ background: "oklch(0.18 0.04 255)" }}>
@@ -67,6 +99,72 @@ export default function ReviewsSection() {
           >
             All Our Reviews So Far
           </h2>
+        </div>
+
+        {/* Leave a review form */}
+        <div className="reveal max-w-md mx-auto mb-16">
+          <div
+            className="p-8"
+            style={{
+              background: "oklch(0.22 0.04 255)",
+              border: "1px solid oklch(0.65 0.2 220 / 0.2)",
+              borderRadius: "4px",
+            }}
+          >
+            <h3
+              className="mb-6"
+              style={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: "1.8rem",
+                color: "white",
+                letterSpacing: "0.03em",
+              }}
+            >
+              Leave a Review
+            </h3>
+            {formState === "success" ? (
+              <p style={{ fontFamily: "'DM Sans', sans-serif", color: "oklch(0.65 0.2 220)", fontSize: "0.95rem" }}>
+                Thanks for your review!
+              </p>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                <div>
+                  <label style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.7rem", letterSpacing: "0.08em", textTransform: "uppercase" as const, color: "oklch(0.55 0.01 240)", marginBottom: "0.4rem", display: "block" }}>
+                    Your Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    placeholder="Your name"
+                    style={{ width: "100%", background: "oklch(0.18 0.04 255)", border: "1px solid oklch(1 0 0 / 0.12)", borderRadius: "2px", padding: "0.75rem 1rem", color: "white", fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", outline: "none" }}
+                    onFocus={(e) => (e.target.style.borderColor = "oklch(0.65 0.2 220)")}
+                    onBlur={(e) => (e.target.style.borderColor = "oklch(1 0 0 / 0.12)")}
+                  />
+                </div>
+                <div>
+                  <label style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.7rem", letterSpacing: "0.08em", textTransform: "uppercase" as const, color: "oklch(0.55 0.01 240)", marginBottom: "0.6rem", display: "block" }}>
+                    Your Rating *
+                  </label>
+                  <Stars rating={form.rating} interactive onChange={(r) => setForm({ ...form, rating: r })} />
+                </div>
+                {formState === "error" && (
+                  <p style={{ color: "oklch(0.7 0.2 25)", fontFamily: "'DM Sans', sans-serif", fontSize: "0.85rem" }}>
+                    Something went wrong. Please try again.
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  disabled={formState === "submitting"}
+                  className="btn-electric"
+                  style={{ opacity: formState === "submitting" ? 0.7 : 1, cursor: formState === "submitting" ? "not-allowed" : "pointer" }}
+                >
+                  {formState === "submitting" ? "Submitting…" : "Submit Review"}
+                </button>
+              </form>
+            )}
+          </div>
         </div>
 
         {/* Reviews grid */}

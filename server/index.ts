@@ -123,18 +123,18 @@ async function startServer() {
   });
 
   app.post("/api/reviews", async (req, res) => {
-    const { name, location, rating, message } = req.body;
+    const { name, rating } = req.body;
 
-    if (!name || !rating || !message) {
+    if (!name || !rating) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
     const review: Review = {
       id: Date.now().toString(),
       name,
-      location: location || "",
+      location: "New Forest",
       rating: Math.min(5, Math.max(1, Number(rating))),
-      message,
+      message: "",
       date: new Date().toISOString().split("T")[0],
     };
 
@@ -150,8 +150,7 @@ async function startServer() {
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px;">
             <h2 style="color: #0d1b35;">New review on JJCleanRides</h2>
-            <p><strong>${name}</strong>${location ? ` — ${location}` : ""} left a <strong>${rating}/5 star</strong> review:</p>
-            <blockquote style="border-left: 3px solid #38bdf8; padding-left: 16px; color: #475569; font-style: italic;">"${message}"</blockquote>
+            <p><strong>${name}</strong> left a <strong>${rating}/5 star</strong> review.</p>
           </div>
         `,
       });
