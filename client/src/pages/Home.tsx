@@ -8,7 +8,7 @@ import ServicesSection from "@/components/ServicesSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import GallerySection from "@/components/GallerySection";
 import AboutSection from "@/components/AboutSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
+import ReviewsSection from "@/components/ReviewsSection";
 import EnquiryFormSection from "@/components/EnquiryFormSection";
 import Footer from "@/components/Footer";
 
@@ -21,7 +21,7 @@ export default function Home() {
       <HowItWorksSection />
       <GallerySection />
       <AboutSection />
-      <TestimonialsSection />
+      <ReviewsSection />
       <EnquiryFormSection />
       <Footer />
     </div>
