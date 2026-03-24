@@ -3,8 +3,7 @@
    Full-bleed image, text anchored bottom-left, diagonal bottom cut
    ============================================================ */
 
-const HERO_IMG =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663470774982/3gi9ycfsRZLZBDYVekpZBe/hero-bg-5xJfFNufZMJF5v8ZRyT76T.webp";
+const HERO_IMG = "/gallery/range-rover-velar.jpg";
 
 export default function HeroSection() {
   const scrollTo = (id: string) => {
