@@ -65,7 +65,7 @@ export default function ReviewsSection() {
               lineHeight: 1,
             }}
           >
-            What People Say
+            All Our Reviews So Far
           </h2>
         </div>
 
