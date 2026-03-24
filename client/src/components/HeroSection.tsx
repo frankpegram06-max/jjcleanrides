@@ -20,9 +20,9 @@ export default function HeroSection() {
       <div
         className="md:hidden absolute inset-0"
         style={{
-          backgroundImage: "url(/gallery/hero-jack.jpg)",
+          backgroundImage: "url(/gallery/hero-merc-blue.jpg)",
           backgroundSize: "cover",
-          backgroundPosition: "center 35%",
+          backgroundPosition: "center 50%",
         }}
       />
       <div
@@ -170,13 +170,13 @@ export default function HeroSection() {
         }}
       >
         <img
-          src="/gallery/hero-jack.jpg"
+          src="/gallery/hero-merc-blue.jpg"
           alt="Freshly valeted Range Rover Velar by JJCleanRides"
           style={{
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: "center 30%",
+            objectPosition: "center 50%",
             display: "block",
           }}
         />

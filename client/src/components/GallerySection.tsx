@@ -7,6 +7,11 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const featuredImages = [
   {
+    src: "/gallery/hero-merc-blue.jpg",
+    alt: "Blue Mercedes A-Class after full valet with sunset sky",
+    caption: "Mercedes A-Class — exterior valet",
+  },
+  {
     src: "/gallery/range-rover-velar.jpg",
     alt: "Glossy black Range Rover Velar after full valet",
     caption: "Range Rover Velar — full exterior detail",
@@ -15,11 +20,6 @@ const featuredImages = [
     src: "/gallery/bmw-interior.jpg",
     alt: "BMW X5 premium brown leather interior after deep clean",
     caption: "BMW X5 — deep interior detail",
-  },
-  {
-    src: "/gallery/mercedes-interior.jpg",
-    alt: "Mercedes A-Class AMG interior clean and spotless",
-    caption: "Mercedes A-Class AMG — interior clean",
   },
 ];
 
