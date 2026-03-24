@@ -1,40 +1,76 @@
 /* ============================================================
    JJCleanRides — Photo Gallery Section
-   Masonry-style grid with lightbox on click
+   3 featured photos + expandable grid with lightbox
    ============================================================ */
 import { useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
-const galleryImages = [
+const featuredImages = [
   {
-    src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663470774982/3gi9ycfsRZLZBDYVekpZBe/gallery-1-9MSNN6uQDRPyQfEA3SWS7L.webp",
-    full: "https://d2xsxph8kpxj0f.cloudfront.net/310519663470774982/3gi9ycfsRZLZBDYVekpZBe/gallery-1-K3wg4FxZyyz3bQYB5EnPoC.png",
-    alt: "Water beading on freshly detailed paint",
-    caption: "Hydrophobic coating — water beads perfectly",
+    src: "/gallery/range-rover-velar.jpg",
+    alt: "Glossy black Range Rover Velar after full valet",
+    caption: "Range Rover Velar — full exterior detail",
   },
   {
-    src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663470774982/3gi9ycfsRZLZBDYVekpZBe/gallery-2-9gVVkeiHJikDudekqStCCm.webp",
-    full: "https://d2xsxph8kpxj0f.cloudfront.net/310519663470774982/3gi9ycfsRZLZBDYVekpZBe/gallery-2-fZxBJpkVvZVjfh63MCxBWa.png",
-    alt: "Immaculate car interior after deep clean",
-    caption: "Deep interior detail — leather conditioned, carpets spotless",
+    src: "/gallery/bmw-interior.jpg",
+    alt: "BMW X5 premium brown leather interior after deep clean",
+    caption: "BMW X5 — deep interior detail",
   },
   {
-    src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663470774982/3gi9ycfsRZLZBDYVekpZBe/gallery-3-9cbtVk6zTdX6ZwzimHRxSD.webp",
-    full: "https://d2xsxph8kpxj0f.cloudfront.net/310519663470774982/3gi9ycfsRZLZBDYVekpZBe/gallery-3-fxHvdZ6pm5udZNAed4oLVN.png",
-    alt: "Before and after alloy wheel clean",
-    caption: "Before & after — alloy wheels restored",
-  },
-  {
-    src: "https://d2xsxph8kpxj0f.cloudfront.net/310519663470774982/3gi9ycfsRZLZBDYVekpZBe/hero-bg-5xJfFNufZMJF5v8ZRyT76T.webp",
-    full: "https://d2xsxph8kpxj0f.cloudfront.net/310519663470774982/3gi9ycfsRZLZBDYVekpZBe/hero-bg-FJQQTaWymMTMzY63F6AVzX.png",
-    alt: "Professional mobile valeting at dusk",
-    caption: "Mobile valeting — we come to your door",
+    src: "/gallery/mercedes-interior.jpg",
+    alt: "Mercedes A-Class AMG interior clean and spotless",
+    caption: "Mercedes A-Class AMG — interior clean",
   },
 ];
 
+const moreImages = [
+  {
+    src: "/gallery/mercedes-front.jpg",
+    alt: "Black Mercedes A-Class front exterior after valet",
+    caption: "Mercedes A-Class — exterior valet",
+  },
+  {
+    src: "/gallery/mercedes-side.jpg",
+    alt: "Black Mercedes side profile with glossy paint",
+    caption: "Mercedes — gloss paint finish",
+  },
+  {
+    src: "/gallery/paint-gloss.jpg",
+    alt: "Mirror-like gloss paint panel after detailing",
+    caption: "Paint detail — mirror finish",
+  },
+  {
+    src: "/gallery/range-rover-interior.jpg",
+    alt: "Range Rover rear leather interior after deep clean",
+    caption: "Range Rover — leather interior detail",
+  },
+  {
+    src: "/gallery/ford-ranger-interior.jpg",
+    alt: "Ford Ranger Raptor black and red interior after clean",
+    caption: "Ford Ranger Raptor — interior detail",
+  },
+  {
+    src: "/gallery/mercedes-door.jpg",
+    alt: "Mercedes A-Class door open showing spotless interior",
+    caption: "Mercedes A-Class — interior clean",
+  },
+  {
+    src: "/gallery/ford-ranger.jpg",
+    alt: "Ford Ranger Raptor exterior after valet",
+    caption: "Ford Ranger Raptor — exterior valet",
+  },
+];
+
+type GalleryImage = {
+  src: string;
+  alt: string;
+  caption: string;
+};
+
 export default function GallerySection() {
   const { ref } = useScrollReveal();
-  const [lightbox, setLightbox] = useState<null | { src: string; full: string; alt: string; caption: string }>(null);
+  const [showMore, setShowMore] = useState(false);
+  const [lightbox, setLightbox] = useState<GalleryImage | null>(null);
 
   return (
     <section id="gallery" className="py-24" style={{ background: "oklch(0.18 0.04 255)" }}>
@@ -60,25 +96,18 @@ export default function GallerySection() {
           >
             Photo Gallery
           </h2>
-          <p
-            className="mt-3 text-sm"
-            style={{ color: "oklch(0.55 0.01 240)", fontFamily: "'DM Sans', sans-serif" }}
-          >
-            Placeholder images — your real work photos will go here.
-          </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {galleryImages.map((img, i) => (
+        {/* Featured 3 */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+          {featuredImages.map((img, i) => (
             <div
               key={i}
               className="reveal group relative overflow-hidden cursor-pointer"
               style={{
                 transitionDelay: `${i * 0.08}s`,
                 borderRadius: "4px",
-                aspectRatio: i === 0 || i === 3 ? "4/5" : "1/1",
-                gridRow: i === 0 || i === 3 ? "span 1" : "auto",
+                aspectRatio: "4/3",
               }}
               onClick={() => setLightbox(img)}
             >
@@ -88,27 +117,19 @@ export default function GallerySection() {
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              {/* Hover overlay */}
               <div
                 className="absolute inset-0 flex items-end p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{
                   background: "linear-gradient(to top, oklch(0.1 0.04 255 / 0.85) 0%, transparent 60%)",
                 }}
               >
-                <p
-                  className="text-xs text-white"
-                  style={{ fontFamily: "'DM Sans', sans-serif" }}
-                >
+                <p className="text-xs text-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                   {img.caption}
                 </p>
               </div>
-              {/* Expand icon */}
               <div
                 className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-7 h-7 flex items-center justify-center"
-                style={{
-                  background: "oklch(0.65 0.2 220 / 0.9)",
-                  borderRadius: "2px",
-                }}
+                style={{ background: "oklch(0.65 0.2 220)", borderRadius: "2px" }}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                   <polyline points="15 3 21 3 21 9" />
@@ -120,6 +141,61 @@ export default function GallerySection() {
             </div>
           ))}
         </div>
+
+        {/* Expanded grid */}
+        {showMore && (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+            {moreImages.map((img, i) => (
+              <div
+                key={i}
+                className="group relative overflow-hidden cursor-pointer"
+                style={{ borderRadius: "4px", aspectRatio: "1/1" }}
+                onClick={() => setLightbox(img)}
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div
+                  className="absolute inset-0 flex items-end p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background: "linear-gradient(to top, oklch(0.1 0.04 255 / 0.85) 0%, transparent 60%)",
+                  }}
+                >
+                  <p className="text-xs text-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    {img.caption}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* See More / See Less button */}
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={() => setShowMore(!showMore)}
+            className="btn-ghost flex items-center gap-2"
+          >
+            {showMore ? "See Less" : "See More Work"}
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              style={{
+                transform: showMore ? "rotate(180deg)" : "none",
+                transition: "transform 0.3s ease",
+              }}
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Lightbox */}
@@ -130,11 +206,11 @@ export default function GallerySection() {
           onClick={() => setLightbox(null)}
         >
           <div
-            className="relative max-w-4xl w-full"
+            className="relative max-w-3xl w-full"
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={lightbox.full}
+              src={lightbox.src}
               alt={lightbox.alt}
               className="w-full rounded object-contain"
               style={{ maxHeight: "80vh" }}
@@ -153,7 +229,6 @@ export default function GallerySection() {
                 borderRadius: "2px",
                 color: "white",
                 fontSize: "1.2rem",
-                lineHeight: 1,
               }}
               aria-label="Close"
             >
