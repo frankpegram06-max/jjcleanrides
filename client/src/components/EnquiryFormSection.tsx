@@ -107,6 +107,27 @@ export default function EnquiryFormSection() {
             >
               Fill in the form and Jack will be in touch within 24 hours.
             </p>
+            <div className="flex items-center gap-3 mt-4">
+              {[
+                { icon: "💵", label: "Cash accepted" },
+                { icon: "💳", label: "Card via Stripe" },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  className="flex items-center gap-2 px-3 py-1.5"
+                  style={{
+                    background: "oklch(0.22 0.04 255)",
+                    border: "1px solid oklch(1 0 0 / 0.08)",
+                    borderRadius: "2px",
+                  }}
+                >
+                  <span style={{ fontSize: "0.85rem" }}>{item.icon}</span>
+                  <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.65rem", color: "oklch(0.65 0.2 220)", letterSpacing: "0.06em", textTransform: "uppercase" as const }}>
+                    {item.label}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Success state */}
