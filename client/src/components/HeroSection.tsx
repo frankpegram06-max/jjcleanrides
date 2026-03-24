@@ -3,7 +3,7 @@
    Full-bleed image, text anchored bottom-left, diagonal bottom cut
    ============================================================ */
 
-const HERO_IMG = "/gallery/range-rover-velar.jpg";
+const HERO_IMG = "/gallery/hero-rrv.jpg";
 
 export default function HeroSection() {
   const scrollTo = (id: string) => {
@@ -23,7 +23,7 @@ export default function HeroSection() {
         style={{
           backgroundImage: `url(${HERO_IMG})`,
           backgroundSize: "cover",
-          backgroundPosition: "center 30%",
+          backgroundPosition: "center 40%",
           backgroundRepeat: "no-repeat",
         }}
       />
@@ -33,7 +33,7 @@ export default function HeroSection() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to bottom, oklch(0.12 0.04 255 / 0.35) 0%, oklch(0.12 0.04 255 / 0.55) 50%, oklch(0.12 0.04 255 / 0.92) 100%)",
+            "linear-gradient(to bottom, oklch(0.12 0.04 255 / 0.10) 0%, oklch(0.12 0.04 255 / 0.30) 50%, oklch(0.12 0.04 255 / 0.82) 100%)",
         }}
       />
 
