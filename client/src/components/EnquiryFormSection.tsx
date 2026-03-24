@@ -6,9 +6,7 @@
 import { useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
-// Formspree endpoint — sign up at https://formspree.io using jj1103200825@gmail.com
-// then replace YOUR_FORM_ID with the ID from your Formspree dashboard
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const ENQUIRY_ENDPOINT = "/api/enquiry";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
@@ -23,13 +21,13 @@ export default function EnquiryFormSection() {
     setErrorMsg("");
 
     const form = e.currentTarget;
-    const data = new FormData(form);
+    const data = Object.fromEntries(new FormData(form));
 
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(ENQUIRY_ENDPOINT, {
         method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
       });
 
       if (res.ok) {
